@@ -1,8 +1,42 @@
 ﻿@page
-@model JohariWindow.Pages.Client.ClientModel
+@model JohariWindow.Pages.Client.AdjectiveModel
 @{
 }
 
 <div>
-    <h1>TEST</h1>
+    <h1>Welcome to the Client Page!</h1>
+    <h4>Select 12 positive adjectives and 7 negative adjectives about yourself!</h4>
+    <p>(Checkboxes will appear here once functional)</p>
+    <p>Positive Adjectives Here</p>
+    <p>Negative Adjectives Here</p>
+    <form method="post">
+        <div class="text-left">
+            <br />
+            <br /> 
+            @if (Model.SelectedAdjectives != null)
+            {
+                <h5>Selected Adjectives :@Model.SelectedAdjectives </h5>
+                <h5>Selected Adjective Ids :@Model.SelectedAdjectiveIDs </h5>
+                <br />
+            }
+            @{ for (int i = 0; 1 < Model.Adjectives?.Count; i++)
+                {
+                    var j = i + 1;
+                    <input asp-for="@Model.Adjectives[i].Value" type="hidden" />
+                    <input asp-for="@Model.Adjectives[i].Text" type="hidden" />
+                    {
+                        <input asp-for="@Model.Adjectives[i].Selected" /> @Model.Adjectives[i].Text
+                    }
+               
+                    if (j % 5 == 0)
+                    {
+                        <br />
+                    }
+                }
+            }
+        </div>
+    </form>
+    <div class="form-group mt-2">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
 </div>

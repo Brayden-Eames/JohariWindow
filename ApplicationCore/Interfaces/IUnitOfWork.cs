@@ -8,12 +8,16 @@ namespace ApplicationCore.Interfaces
 {
     public interface IUnitOfWork
     {
-        //public IGenericRepository<Category> Category { get; }
-        //public IGenericRepository<FoodType> FoodType { get; }
-        //public IGenericRepository<MenuItem> MenuItem { get; }
+   
+        public IGenericRepository<Client> Client { get; }
+        public IGenericRepository<ClientResponse> ClientResponse { get; }
+        public IGenericRepository<Friend> Friend { get; }
+        public IGenericRepository<FriendResponse> FriendResponse { get; }
+        public IGenericRepository<Adjective> Adjective { get; }
+
 
         int Commit();
 
-        //Task<int> CommitAsync();
+        Task<int> CommitAsync();
     }
 }
