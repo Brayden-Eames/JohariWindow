@@ -14,10 +14,10 @@ namespace JohariWindow.Pages.Client
     {
         private readonly IUnitOfWork _unitofWork;
 
-        public AdjectiveModel(IUnitOfWork unitofWork)
-        {
-            _unitofWork = unitofWork;
-        }
+        public AdjectiveModel(IUnitOfWork unitofWork) => _unitofWork = unitofWork;
+        //{
+        //    _unitofWork = unitofWork;
+        //}
 
         [BindProperty]
        public IList<SelectListItem> Adjectives { get; set; }
@@ -30,12 +30,12 @@ namespace JohariWindow.Pages.Client
 
         public void OnGet()
         {
-            ////populate the model from the database
-            //List<Adjective> AdjectiveList = new List<Adjective>();
-            //AdjectiveList = (List<Adjective>)_unitofWork.Adjective.List(null, null, null);
-            //Adjectives = AdjectiveList.ToList<Adjective>()
-            //    .Select(c => new SelectListItem { Text = c.AdjName, Value = c.AdjectiveId.ToString() })
-            //    .ToList<SelectListItem>();
+            //populate the model from the database
+            List<Adjective> AdjectiveList = new List<Adjective>();
+            AdjectiveList = (List<Adjective>)_unitofWork.Adjective.List(null, c => c.AdjectiveId, null);
+            Adjectives = AdjectiveList.ToList<Adjective>()
+                .Select(c => new SelectListItem { Text = c.AdjName, Value = c.AdjType.ToString() }) //this was c.Adjectiveid.ToString()
+                .ToList<SelectListItem>();
         }
 
         public IActionResult OnPost()
