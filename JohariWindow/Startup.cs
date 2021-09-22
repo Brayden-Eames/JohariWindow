@@ -1,4 +1,5 @@
 using ApplicationCore.Interfaces;
+using ApplicationCore.Models;
 using Infrastructure.Data;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -35,7 +36,7 @@ namespace JohariWindow
                     options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContext"),
                     sqlServerOptions => sqlServerOptions.MigrationsAssembly("Infrastructure")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
