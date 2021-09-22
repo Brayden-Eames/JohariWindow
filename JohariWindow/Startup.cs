@@ -29,7 +29,7 @@ namespace JohariWindow
             services.AddRazorPages();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContextLocal"),
+                    options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContext"),
                     sqlServerOptions => sqlServerOptions.MigrationsAssembly("Infrastructure")));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
