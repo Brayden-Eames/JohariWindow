@@ -44,6 +44,8 @@ namespace JohariWindow.Pages.Client
             {
                 if (Adjective.Selected)
                 {
+                    //here is where you want to send the values to the database
+                    //SelectedAdjectives = _unitofWork.ClientResponse.Add();
                     SelectedAdjectives = $"{Adjective.Text}, {SelectedAdjectives}";
                     SelectedAdjectiveIDs = $"{Adjective.Value}, {SelectedAdjectiveIDs}";
                 }   
