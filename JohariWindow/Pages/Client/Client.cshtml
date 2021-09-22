@@ -10,85 +10,66 @@
         <div class="text-left">
             <br />
             <br /> 
-            @*@if (Model.SelectedAdjectives != null)
-            {
-                <h5>Selected Adjectives :@Model.SelectedAdjectives </h5>
-                <h5>Selected Adjective Ids :@Model.SelectedAdjectiveIDs </h5>
-                <br />
-            }
-            @{ for (int i = 0; i < Model.Adjectives.Count; i++)
-                {
-                    var j = i + 1;
-                    <input asp-for="@Model.Adjectives[i].Value" type="hidden" />
-                    <input asp-for="@Model.Adjectives[i].Text" type="hidden" />
-                    {
-                        <input asp-for="@Model.Adjectives[i].Selected" /> @Model.Adjectives[i].Text
-                    }
-               
-                    if (j % 5 == 0)
-                    {
-                        <br />
-                    }
-                }
-            }*@
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <p>Positive Adjectives</p>
+                        @{ for (int i = 0; i < Model.Adjectives.Count; i++)
+                            {
+                                if (Model.Adjectives[i].Value == "True")
+                                {
+                                    var j = i + 1;
+                                    <input asp-for="@Model.Adjectives[i].Value" type="hidden" />
+                                    <input asp-for="@Model.Adjectives[i].Text" type="hidden" />
+                                    {
+                                        <input asp-for="@Model.Adjectives[i].Selected" /> @Model.Adjectives[i].Text
+                                    }
+
+                                    if (j % 1 == 0)
+                                    {
+                                        <br />
+                                    }
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+
+                            }
+                        }
+                    </div>
+                    <div class="col-6">
+                        <p>Negative Adjectives</p>
+                        @{ for (int i = 0; i < Model.Adjectives.Count; i++)
+                            {
+                                if (Model.Adjectives[i].Value == "False")
+                                {
+                                    var j = i + 1;
+                                    <input asp-for="@Model.Adjectives[i].Value" type="hidden" />
+                                    <input asp-for="@Model.Adjectives[i].Text" type="hidden" />
+                                    {
+                                        <input asp-for="@Model.Adjectives[i].Selected" /> @Model.Adjectives[i].Text
+                                    }
+
+                                    if (j % 1 == 0)
+                                    {
+                                        <br />
+                                    }
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-                <p>Positive Adjectives</p>
-                @{ for (int i = 0; i < Model.Adjectives.Count; i++)
-                    {
-                        if (Model.Adjectives[i].Value == "True")
-                        {
-                            var j = i + 1;
-                            <input asp-for="@Model.Adjectives[i].Value" type="hidden" />
-                            <input asp-for="@Model.Adjectives[i].Text" type="hidden" />
-                            {
-                                <input asp-for="@Model.Adjectives[i].Selected" /> @Model.Adjectives[i].Text
-                            }
-
-                            if (j % 5 == 0)
-                            {
-                                <br />
-                            }
-                        }
-                        else
-                        {
-                            continue;
-                        }
-
-                    }
-                }
-            </div>
-            <div class="col-6">
-                <p>Negative Adjectives</p>
-                @{ for (int i = 0; i < Model.Adjectives.Count; i++)
-                    {
-                        if (Model.Adjectives[i].Value == "False")
-                        {
-                            var j = i + 1;
-                            <input asp-for="@Model.Adjectives[i].Value" type="hidden" />
-                            <input asp-for="@Model.Adjectives[i].Text" type="hidden" />
-                            {
-                                <input asp-for="@Model.Adjectives[i].Selected" /> @Model.Adjectives[i].Text
-                            }
-
-                            if (j % 5 == 0)
-                            {
-                                <br />
-                            }
-                        }
-                        else
-                        {
-                            continue;
-                        }
-
-                    }
-                }
-            </div>
-        </div>
-    </div>
+    <br/>
+    <br />
     <div class="form-group mt-2">
         <input type="submit" value="Submit" class="btn btn-primary" />
     </div>
