@@ -12,11 +12,11 @@ namespace ApplicationCore.Models
         public int ResponseId { get; set; }
 
         //[NotMapped] //temporary, resolving issue with add migration
-        [ForeignKey("ClientId")]
-        public virtual Client ClientId { get; set; }
+        [ForeignKey("AdjectiveId")]
+        public virtual Adjective Adjective { get; set; }
 
         //[NotMapped] //temporary, resolving issue with add migration
-        [ForeignKey("AdjectiveId")]
-        public virtual Adjective AdjectiveId { get; set; }
+        [ForeignKey("ClientId")]
+        public virtual Client Client { get; set; }
     }
 }

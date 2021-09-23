@@ -13,14 +13,14 @@ namespace ApplicationCore.Models
 
         //[NotMapped] //temporary, resolving issue with add migration
         [ForeignKey("AdjectiveId")]
-        public virtual Adjective AdjectiveId { get; set; }
+        public virtual Adjective Adjective { get; set; }
 
         //[NotMapped] //temporary, resolving issue with add migration
         [ForeignKey("ClientId")]
-        public virtual Client ClientId { get; set; }
+        public virtual Client Client { get; set; }
 
         //[NotMapped] //temporary, resolving issue with add migration
         [ForeignKey("FriendId")]
-        public virtual Friend FriendId { get; set; }
+        public virtual Friend Friend { get; set; }
     }
 }
