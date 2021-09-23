@@ -21,16 +21,16 @@ namespace JohariWindow.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<Client> _signInManager;
+        private readonly UserManager<Client> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
 
 
         public RegisterModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager<Client> userManager,
+            SignInManager<Client> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             RoleManager<IdentityRole> roleManager)
@@ -91,7 +91,7 @@ namespace JohariWindow.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 //expand identityuser with applicationuser properties
-                var user = new ApplicationUser
+                var user = new Client
                 {
                     UserName = Input.Email,
                     Email = Input.Email,

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace JohariWindow.Pages.Client
+namespace JohariWindow.Pages.ClientPage
 {
     public class AdjectiveModel : PageModel
     {

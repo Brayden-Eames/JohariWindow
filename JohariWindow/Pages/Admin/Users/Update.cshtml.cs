@@ -14,16 +14,16 @@ namespace JohariWindow.Pages.Admin.User
     {
 
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<Client> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public UpdateModel(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public UpdateModel(IUnitOfWork unitOfWork, UserManager<Client> userManager, RoleManager<IdentityRole> roleManager)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
             _roleManager = roleManager;
         }
         [BindProperty]
-        public ApplicationUser AppUser { get; set; }
+        public Client AppUser { get; set; }
 
         public List<string> UsersRoles { get; set; }
         public List<string> AllRoles { get; set; }
@@ -31,7 +31,7 @@ namespace JohariWindow.Pages.Admin.User
         public List<string> OldRoles { get; set; }
         public async Task OnGetAsync(string id)
         {
-            AppUser = _unitOfWork.ApplicationUser.Get(u => u.Id == id);
+            AppUser = _unitOfWork.Client.Get(u => u.Id == id);
             var roles = await _userManager.GetRolesAsync(AppUser);
             UsersRoles = roles.ToList();
             OldRoles = roles.ToList();
@@ -44,12 +44,12 @@ namespace JohariWindow.Pages.Admin.User
             var oldRoles = await _userManager.GetRolesAsync(AppUser);
             OldRoles = oldRoles.ToList();
             var rolesToAdd = new List<string>();
-            var user = _unitOfWork.ApplicationUser.Get(u => u.Id == AppUser.Id);
+            var user = _unitOfWork.Client.Get(u => u.Id == AppUser.Id);
             user.FirstName = AppUser.FirstName;
             user.LastName = AppUser.LastName;
             user.Email = AppUser.Email;
             user.PhoneNumber = AppUser.PhoneNumber;
-            _unitOfWork.ApplicationUser.Update(user);
+            _unitOfWork.Client.Update(user);
             _unitOfWork.Commit();
 
             foreach (var r in UsersRoles)

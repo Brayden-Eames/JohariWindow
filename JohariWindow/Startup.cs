@@ -36,7 +36,7 @@ namespace JohariWindow
                     options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContext"),
                     sqlServerOptions => sqlServerOptions.MigrationsAssembly("Infrastructure")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<Client, IdentityRole>()
             .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 

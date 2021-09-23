@@ -4,21 +4,19 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Linq;
 
 namespace ApplicationCore.Models
 {
-    public class Client
+    public class Client : IdentityUser
     {
-        [Key]
-        public int ClientId { get; set; }
-
         [Required]
         [Display(Name = "First Name")]
-        public string firstName { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
         [Display(Name = "Last Name")]
-        public string lastName { get; set; }
+        public string LastName { get; set; }
 
         [Required]
         [Display(Name = "Date of Birth")]
@@ -27,5 +25,8 @@ namespace ApplicationCore.Models
         [Required]
         [Display(Name = "Gender")]
         public string gender { get; set; }
+
+        [NotMapped]
+        public string FullName { get { return FirstName + " " + LastName; } }
     }
 }

@@ -14,7 +14,7 @@ namespace ApplicationCore.Interfaces
         public IGenericRepository<Friend> Friend { get; }
         public IGenericRepository<FriendResponse> FriendResponse { get; }
         public IGenericRepository<Adjective> Adjective { get; }
-        public IGenericRepository<ApplicationUser> ApplicationUser { get; }
+        //public IGenericRepository<ApplicationUser> ApplicationUser { get; }
 
 
         int Commit();
