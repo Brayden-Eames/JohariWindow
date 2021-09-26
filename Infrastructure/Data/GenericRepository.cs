@@ -82,6 +82,11 @@ namespace Infrastructure.Data
             return _dbContext.Set<T>().Find(id); //find particular records by a specified ID
         }
 
+        public virtual T GetByClientId(string id)
+        {
+            return _dbContext.Set<T>().Find(id);
+        }
+
         public virtual IEnumerable<T> List()
         {
             return _dbContext.Set<T>().ToList().AsEnumerable();

@@ -10,6 +10,8 @@ namespace ApplicationCore.Interfaces
     {
         // Get object by it's key id
         T GetById(int id);
+
+        T GetByClientId(string id);
         // predicate is used to verify a condition on an object 
         // noTracking is ReadOnly Results, and Includes is Join of other objects 
         T Get(Expression<Func<T, bool>> predicate, bool asNoTracking = false, string includes = null);

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Models
 {
-    //public class ApplicationUser
+    //public class ApplicationUser REMOVE 
     //{
     //    public string FirstName { get; set; }
     //    public string LastName { get; set; }

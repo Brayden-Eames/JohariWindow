@@ -1,4 +1,5 @@
-﻿@page
+﻿
+@page
 @model JohariWindow.Pages.ClientPage.AdjectiveModel
 @{
 }
@@ -9,68 +10,46 @@
     <form method="post">
         <div class="text-left">
             <br />
-            <br /> 
+            <br />
             <div class="container">
                 <div class="row">
                     <div class="col-6">
                         <p>Positive Adjectives</p>
-                        @{ for (int i = 0; i < Model.Adjectives.Count; i++)
+                        @foreach (var adjective in Model.ClientObject.ListOfAdjectives)
+                        {
+                            if (adjective.AdjType == true)
                             {
-                                if (Model.Adjectives[i].Value == "True")
-                                {
-                                    var j = i + 1;
-                                    <input asp-for="@Model.Adjectives[i].Value" type="hidden" />
-                                    <input asp-for="@Model.Adjectives[i].Text" type="hidden" />
-                                    {
-                                        <input asp-for="@Model.Adjectives[i].Selected" /> @Model.Adjectives[i].Text
-                                    }
-
-                                    if (j % 1 == 0)
-                                    {
-                                        <br />
-                                    }
-                                }
-                                else
-                                {
-                                    continue;
-                                }
-
+                                <input type="checkbox" name="Adjectives" value="@adjective.AdjectiveId" /> @adjective.AdjName
+                                <br />
                             }
+
                         }
+
                     </div>
                     <div class="col-6">
                         <p>Negative Adjectives</p>
-                        @{ for (int i = 0; i < Model.Adjectives.Count; i++)
+                        @foreach (var adjective in Model.ClientObject.ListOfAdjectives)
+                        {
+                            if (adjective.AdjType == false)
                             {
-                                if (Model.Adjectives[i].Value == "False")
-                                {
-                                    var j = i + 1;
-                                    <input asp-for="@Model.Adjectives[i].Value" type="hidden" />
-                                    <input asp-for="@Model.Adjectives[i].Text" type="hidden" />
-                                    {
-                                        <input asp-for="@Model.Adjectives[i].Selected" /> @Model.Adjectives[i].Text
-                                    }
+                                <input type="checkbox" name="Adjectives" value="@adjective.AdjectiveId" /> @adjective.AdjName
 
-                                    if (j % 1 == 0)
-                                    {
-                                        <br />
-                                    }
-                                }
-                                else
-                                {
-                                    continue;
-                                }
-
+                                <br />
                             }
+
                         }
+
                     </div>
                 </div>
             </div>
         </div>
+        <input type="text" name="ClientObject.ClientId" value="@Model.ClientObject.ClientId" hidden />
+      <div class="form-group mt-2">
+           <input type="submit" value="Submit" class="btn btn-primary" />
+      </div>
     </form>
-    <br/>
     <br />
-    <div class="form-group mt-2">
-        <input type="submit" value="Submit" class="btn btn-primary" />
-    </div>
+    <br />
+
 </div>
+
