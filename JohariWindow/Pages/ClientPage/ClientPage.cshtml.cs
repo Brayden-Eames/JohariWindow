@@ -75,7 +75,7 @@ namespace JohariWindow.Pages.ClientPage
 
             _unitofWork.Commit();
 
-            return RedirectToPage("./ClientPage");
+            return RedirectToPage("./ClientConfirmationPage");
             
         }
     }
