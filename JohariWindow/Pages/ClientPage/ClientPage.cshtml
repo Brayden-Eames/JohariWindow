@@ -4,6 +4,7 @@
 @{
 }
 
+
 <div>
     <h1>Welcome to the Client Page!</h1>
     <h4>Select 12 positive adjectives and 7 negative adjectives about yourself!</h4>
@@ -19,7 +20,7 @@
                         {
                             if (adjective.AdjType == true)
                             {
-                                <input type="checkbox" name="Adjectives" value="@adjective.AdjectiveId" /> @adjective.AdjName
+                                <input type="checkbox" name="Adjectives" value="@adjective.AdjectiveId" id="positiveCB" onclick="isChecked()" /> @adjective.AdjName
                                 <br />
                             }
 
@@ -32,7 +33,7 @@
                         {
                             if (adjective.AdjType == false)
                             {
-                                <input type="checkbox" name="Adjectives" value="@adjective.AdjectiveId" /> @adjective.AdjName
+                                <input type="checkbox" name="Adjectives" value="@adjective.AdjectiveId" id="negativeCB" onclick="negChecked()" /> @adjective.AdjName
 
                                 <br />
                             }
@@ -45,11 +46,29 @@
         </div>
         <input type="text" name="ClientObject.ClientId" value="@Model.ClientObject.ClientId" hidden />
       <div class="form-group mt-2">
-           <input type="submit" value="Submit" class="btn btn-primary" />
+           <input type="submit" value="Submit" class="btn btn-primary" asp-page="/ClientPage/ClientConfirmationPage" />
       </div>
     </form>
     <br />
     <br />
 
 </div>
+@section Scripts{
+  <script>
+      var posCount = 0;
+      var negCount = 0;
+      function isChecked() {
+          if (document.getElementById("positiveCB").checked == true) {
+              posCount = $('input:checkbox:checked').length; //currently this is having some kind of issue where it's not properly taking in the posCount value. 
+          }  
+      }
+
+      //function negChecked() {
+      //    if (document.getElementById("negativeCB").checked == true) {
+      //        negCount = $('input:checkbox:checked').length;
+      //    }
+      //}
+
+  </script>
+    }
 
