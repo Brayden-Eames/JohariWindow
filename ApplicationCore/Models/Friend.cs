@@ -16,6 +16,6 @@ namespace ApplicationCore.Models
         public string Relationship { get; set; }
 
         [Display(Name = "How Long have you known your friend?")]
-        public string howLong { get; set; }
+        public int howLong { get; set; }
     }
 }

@@ -17,12 +17,6 @@ namespace JohariWindow.Pages.ClientPage
 
         public AdjectiveModel(IUnitOfWork unitofWork) => _unitofWork = unitofWork;
 
-        // [BindProperty]
-        //public IList<SelectListItem> Adjectives { get; set; }
-
-        // [BindProperty]
-        // public IEnumerable<Adjective> SelectedAdjectives { get; set; }
-
         [BindProperty]
         public ClientPageVM ClientObject{ get; set; }
 
@@ -63,7 +57,7 @@ namespace JohariWindow.Pages.ClientPage
             }
 
             var clientUser = _unitofWork.Client.Get(c => c.Id == ClientObject.ClientId);
-            //var clientUser = "b2c4bc94-423f-40ab-bae4-4163d962a454";
+
             foreach (string id in Adjectives)
             {
                 _unitofWork.ClientResponse.Add(new ApplicationCore.Models.ClientResponse()

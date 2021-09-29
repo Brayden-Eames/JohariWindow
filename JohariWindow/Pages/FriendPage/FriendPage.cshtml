@@ -1,0 +1,122 @@
+﻿@page
+@model JohariWindow.Pages.FriendPage.AdjectiveModel
+@{
+}
+
+
+<div>
+    <h1>Welcome to the Client Page!</h1>
+    <h4>Select 12 positive adjectives and 7 negative adjectives about yourself!</h4>
+    <form method="post">
+        <div class="text-left">
+            <br />
+            <br />
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <p>Positive Adjectives</p>
+                        @foreach (var adjective in Model.FriendObject.ListOfAdjectives)
+                        {
+                            if (adjective.AdjType == true)
+                            {
+                                <input type="checkbox" name="Adjectives" value="@adjective.AdjectiveId" id="positiveCB" /> @adjective.AdjName
+                                <br />
+                            }
+
+                        }
+
+                    </div>
+                    <div class="col-6">
+                        <p>Negative Adjectives</p>
+                        @foreach (var adjective in Model.FriendObject.ListOfAdjectives)
+                        {
+                            if (adjective.AdjType == false)
+                            {
+                                <input type="checkbox" name="Adjectives" value="@adjective.AdjectiveId" id="negativeCB" /> @adjective.AdjName
+
+                                <br />
+                            }
+
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<input type="text" name="FriendObject.ClientId" value="@Model.FriendObject.ClientId" hidden />*@
+        <div class="form-group mt-2">
+            <input type="submit" value="Submit" class="btn btn-primary" onclick="return validateCheckboxes()" />
+        </div>
+    </form>
+    <br />
+    <br />
+
+</div>
+@section Scripts{
+    <script>
+
+
+      function validateCheckboxes() {
+          var inputElems = document.getElementsByTagName("input"), posCount = 0, negCount = 0;
+
+          for (var i = 0; i < inputElems.length; i++) {
+              if (inputElems[i].type == "checkbox" && inputElems[i].id == "positiveCB" && inputElems[i].checked == true) {
+                  posCount++;
+              }
+              if (inputElems[i].type == "checkbox" && inputElems[i].id == "negativeCB" && inputElems[i].checked == true) {
+                  negCount++;
+              }
+          }
+
+          if (posCount > 12) {
+              swal({
+                  title: "Warning: Too Many Positive Adjectives Selected",
+                  text: "More than 12 Positive adjectives selected. Please select only 12.",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true
+              })
+              return false;
+          }
+
+          if (posCount < 12) {
+              swal({
+                  title: "Warning: Not Enough Positive Adjectives Selected",
+                  text: "Less than 12 Positive adjectives selected. Please select at least 12.",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true
+              })
+              return false;
+          }
+
+          if (negCount > 5) {
+              swal({
+                  title: "Warning: Too Many Negative Adjectives Selected",
+                  text: "More than 5 Negative adjectives selected. Please select only 5.",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true
+              })
+              return false;
+          }
+
+          if (negCount < 5) {
+              swal({
+                  title: "Warning: Not Enough Negative Adjectives Selected",
+                  text: "Less than 5 Negative adjectives selected. Please select at least 5.",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true
+              })
+              return false;
+          }
+
+          if (posCount == 12 && negCount == 5) {
+              return true;
+          }
+      }
+
+    </script>
+}
+

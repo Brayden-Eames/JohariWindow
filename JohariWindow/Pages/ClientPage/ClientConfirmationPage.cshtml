@@ -3,6 +3,8 @@
 @{
     <div>
         <h1>Your answers have been recorded successfully!</h1>
+        @*recommend swal() validation upon navigating away from the page, to make sure the user grabbed the Id and link*@
         <a class="nav-link text-dark" asp-area="" asp-page="/Index">Return to Home Page</a>
+        @*retrieve users ClientId and display it here, then generate the actual link to the 'Friend' page.*@ 
     </div>
 }

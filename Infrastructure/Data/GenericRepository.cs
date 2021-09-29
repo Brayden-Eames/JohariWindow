@@ -63,14 +63,14 @@ namespace Infrastructure.Data
                 }
                 if (asNoTracking)
                 {
-                    return _dbContext.Set<T>() //return set of no objects 
+                    return queryable //return set of no objects 
                         .AsNoTracking()
                         .Where(predicate) //this is basically like WHERE clause in SQL. this is LINQ, and the predicate is the function called predicate passed into the function.
                         .FirstOrDefault(); //return a single first or default record. 
                 }
                 else
                 {
-                    return _dbContext.Set<T>()
+                    return queryable
                                .Where(predicate) //notice how 'AsNoTracking()' is not present in this conditional, which means tracking is enabled(?)
                                .FirstOrDefault();
                 }
@@ -202,14 +202,14 @@ namespace Infrastructure.Data
                 }
                 if (asNoTracking)
                 {
-                    return await _dbContext.Set<T>() //return set of no objects 
+                    return await queryable //return set of no objects 
                         .AsNoTracking()
                         .Where(predicate) //this is basically like WHERE clause in SQL. this is LINQ, and the predicate is the function called predicate passed into the function.
                         .FirstOrDefaultAsync(); //return a single first or default record. 
                 }
                 else
                 {
-                    return await _dbContext.Set<T>()
+                    return await queryable
                                .Where(predicate) //notice how 'AsNoTracking()' is not present in this conditional, which means tracking is enabled(?)
                                .FirstOrDefaultAsync();
                 }
