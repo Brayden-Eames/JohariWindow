@@ -2,9 +2,17 @@
 @model JohariWindow.Pages.ClientPage.ClientConfirmationPageModel
 @{
     <div>
+        <br />
         <h1>Your answers have been recorded successfully!</h1>
-        @*recommend swal() validation upon navigating away from the page, to make sure the user grabbed the Id and link*@
+        <br />
+        <br />
+        <h4>Now that you have filled out the survey, it's time for your friends and family to do the same! Send them this code: </h4>
+            <br />
+        <p>(ClientId code shows up here)</p>
+            <br />
+        <h4>And send them this link: https://localhost:44382/FriendPage/FriendPage</h4>
+        <br />
+        <h4>Tell your friends and family to enter the code on this site, fill out the questions, then select the adjectives like you just did, and have them submit their answers!</h4>
         <a class="nav-link text-dark" asp-area="" asp-page="/Index">Return to Home Page</a>
-        @*retrieve users ClientId and display it here, then generate the actual link to the 'Friend' page.*@ 
     </div>
 }

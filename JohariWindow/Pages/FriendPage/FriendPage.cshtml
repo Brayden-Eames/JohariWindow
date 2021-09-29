@@ -5,11 +5,25 @@
 
 
 <div>
-    <h1>Welcome to the Client Page!</h1>
-    <h4>Select 12 positive adjectives and 7 negative adjectives about yourself!</h4>
+    <h1>Johari Window Anonymous Survey</h1>
+    <br />
+    <h4>Please follow the steps below before proceeding:</h4>
+    <br />
     <form method="post">
         <div class="text-left">
-            <br />
+            <p>1. Enter the code given to you by your friend:</p>
+            <input type="text" name="FriendObject.ClientId" value="@Model.FriendObject.ClientId"/>
+                <br />
+                <br />
+            <p>2. What is your relationship to the person who referred you to this survey? (Mother, father, brother, sister, friend, etc.)</p>
+            <input type="text" name="FriendObject.Relationship" value="@Model.FriendObject.Relationship"/>
+                <br />
+                <br />
+            <p>3. How many years have you known this person?</p>
+            <input type="text" name="FriendObject.HowLong" value="@Model.FriendObject.HowLong" />
+                <br />
+                <br />
+            <h5>Select 12 positive adjectives and 7 negative adjectives that describe the person who referred you to this test!</h5>
             <br />
             <div class="container">
                 <div class="row">
@@ -115,7 +129,11 @@
           if (posCount == 12 && negCount == 5) {
               return true;
           }
-      }
+        }
+
+        function validateInfo() {
+
+        }
 
     </script>
 }
