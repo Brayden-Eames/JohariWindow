@@ -1,6 +1,7 @@
 ﻿@page
 @model JohariWindow.Pages.ClientPage.ClientConfirmationPageModel
 @{
+    
     <div>
         <br />
         <h1>Your answers have been recorded successfully!</h1>
@@ -8,7 +9,7 @@
         <br />
         <h4>Now that you have filled out the survey, it's time for your friends and family to do the same! Send them this code: </h4>
             <br />
-        <p>(ClientId code shows up here)</p>
+        <p>@Model.ClientObject.ClientId</p>
             <br />
         <h4>And send them this link: https://localhost:44382/FriendPage/FriendPage</h4>
         <br />

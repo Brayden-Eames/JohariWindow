@@ -8,13 +8,17 @@ using JohariWindow.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace JohariWindow.Pages.ClientPage
 {
     public class AdjectiveModel : PageModel
     {
         private readonly IUnitOfWork _unitofWork;
-
+        
+        
         public AdjectiveModel(IUnitOfWork unitofWork) => _unitofWork = unitofWork;
 
         [BindProperty]
@@ -27,7 +31,7 @@ namespace JohariWindow.Pages.ClientPage
         public IActionResult OnGet(string? clientId) 
         {
             var listOfAdjectives = _unitofWork.Adjective.List();
-            string clientID = "b2c4bc94-423f-40ab-bae4-4163d962a454";
+            var clientID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             clientId = clientID;
 
             if(String.IsNullOrEmpty(clientId))

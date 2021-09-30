@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ApplicationCore.Models;
 using JohariWindow.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace JohariWindow.Pages.FriendPage
 {
@@ -72,7 +73,7 @@ namespace JohariWindow.Pages.FriendPage
                 });
             }
             _unitofWork.Commit();
-            return RedirectToPage("./ClientConfirmationPage");
+            return RedirectToPage("./FriendConfirmationPage");
         }
     }
 }
