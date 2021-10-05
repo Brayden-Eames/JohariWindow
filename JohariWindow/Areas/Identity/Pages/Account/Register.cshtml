@@ -11,7 +11,7 @@
                 <div class="card-body px-lg-5 pt-4">
                     <form method="post" autocomplete="off" asp-route-returnUrl="@Model.ReturnUrl">
                         <h3 class="col-12 text-success text-center py-4">
-                            @if (User.IsInRole(SD.ManagerRole))
+                            @if (User.IsInRole(SD.AdminRole))
                             {
                 <strong>Register an Employee</strong> }
                             else
@@ -49,12 +49,11 @@
                             <input type="password" asp-for="Input.ConfirmPassword" autocomplete="off" placeholder="ConfirmPassword" class="form-control" />
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
-                        @if (User.IsInRole(SD.ManagerRole))
+                        @if (User.IsInRole(SD.AdminRole))
                         {
             <div class="py-2">
-                <input type="radio" name="rdUserRole" value="@SD.KitchenRole" /> @SD.KitchenRole
-                <input type="radio" name="rdUserRole" value="@SD.DriverRole" /> @SD.DriverRole
-                <input type="radio" name="rdUserRole" value="@SD.ManagerRole" /> @SD.ManagerRole
+                <input type="radio" name="rdUserRole" value="@SD.ClientRole" /> @SD.ClientRole
+                <input type="radio" name="rdUserRole" value="@SD.AdminRole" /> @SD.AdminRole
             </div>}
                         <div class="py-2">
                             <button type="submit" class="btn btn-success form-control">Register</button>

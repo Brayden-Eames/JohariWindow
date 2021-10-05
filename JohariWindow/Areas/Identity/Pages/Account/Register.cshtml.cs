@@ -86,7 +86,7 @@ namespace JohariWindow.Areas.Identity.Pages.Account
         {
             //retrieve the role from the form
             string role = Request.Form["rdUserRole"].ToString();
-            if (role == "") { role = SD.ManagerRole; } //make the first login a manager)
+            if (role == "") { role = SD.AdminRole; } //make the first login an admin)
             returnUrl ??= Url.Content("~/"); //null-coalescing assignment operator ??= assigns the value of right-hand operand to its left-hand operand only if the left-hand is nulll
             if (ModelState.IsValid)
             {
@@ -101,38 +101,23 @@ namespace JohariWindow.Areas.Identity.Pages.Account
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 //add the roles to the ASPNET Roles table if they do not exist yet
-                if (!await _roleManager.RoleExistsAsync(SD.ManagerRole))
+                if (!await _roleManager.RoleExistsAsync(SD.AdminRole))
                 {
-                    _roleManager.CreateAsync(new IdentityRole(SD.ManagerRole)).GetAwaiter().GetResult();
-                    _roleManager.CreateAsync(new IdentityRole(SD.DriverRole)).GetAwaiter().GetResult();
-                    _roleManager.CreateAsync(new IdentityRole(SD.KitchenRole)).GetAwaiter().GetResult();
-                    _roleManager.CreateAsync(new IdentityRole(SD.CustomerRole)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new IdentityRole(SD.AdminRole)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new IdentityRole(SD.ClientRole)).GetAwaiter().GetResult();
                 }
                 if (result.Succeeded)
                 //assign role to the user (from the form radio options available after the first manager is created)
                 {
-                    if (role == SD.KitchenRole)
+                    if (role == SD.AdminRole)
                     {
-                        await _userManager.AddToRoleAsync(user, SD.KitchenRole);
+                        await _userManager.AddToRoleAsync(user, SD.AdminRole);
                     }
                     else
                     {
-                        if (role == SD.DriverRole)
-                        {
-                            await _userManager.AddToRoleAsync(user, SD.DriverRole);
-                        }
-                        else
-                        {
-                            if (role == SD.ManagerRole)
-                            {
-                                await _userManager.AddToRoleAsync(user, SD.ManagerRole);
-                            }
-                            else
-                            {
-                                await _userManager.AddToRoleAsync(user, SD.CustomerRole);
-                            }
-                        }
+                        await _userManager.AddToRoleAsync(user, SD.ClientRole);
                     }
+                   
                     _logger.LogInformation("User created a new account with password.");
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
