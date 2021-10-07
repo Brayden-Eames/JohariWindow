@@ -26,7 +26,7 @@
             <input type="text" id="howLongField" name="FriendObject.HowLong" value="@Model.FriendObject.HowLong" />
             <br />
             <br />
-            <h5>Select 12 positive adjectives and 5 negative adjectives that describe the person who referred you to this test!</h5>
+            <h5>Select 12 positive adjectives and 7 negative adjectives that describe the person who referred you to this test!</h5>
             <br />
             <div class="container">
                 <div class="row">
@@ -106,10 +106,10 @@
                 return false;
             }
 
-            if (negCount > 5) {
+            if (negCount > 7) {
                 swal({
                     title: "Warning: Too Many Negative Adjectives Selected",
-                    text: "More than 5 Negative adjectives selected. Please select only 5.",
+                    text: "More than 7 Negative adjectives selected. Please select only 7.",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true
@@ -117,10 +117,10 @@
                 return false;
             }
 
-            if (negCount < 5) {
+            if (negCount < 7) {
                 swal({
                     title: "Warning: Not Enough Negative Adjectives Selected",
-                    text: "Less than 5 Negative adjectives selected. Please select at least 5.",
+                    text: "Less than 7 Negative adjectives selected. Please select at least 7.",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true
@@ -161,7 +161,7 @@
                 return false;
             }
 
-            if (posCount == 12 && negCount == 5) {
+            if (posCount == 12 && negCount == 7) {
                 return true;
             }
         }

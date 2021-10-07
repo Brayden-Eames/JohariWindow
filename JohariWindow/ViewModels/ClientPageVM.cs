@@ -12,6 +12,7 @@ namespace JohariWindow.ViewModels
         public IEnumerable<Adjective> ListOfAdjectives { get; set; }
         public string ClientId { get; set; }
         public SelectedAdjectiveList listOfSelectedAdjectives { get; internal set; }
+        public bool hasSubmited { get; set; }
 
 
     }

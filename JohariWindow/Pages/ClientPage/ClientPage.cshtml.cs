@@ -33,8 +33,10 @@ namespace JohariWindow.Pages.ClientPage
             var listOfAdjectives = _unitofWork.Adjective.List();
             var clientID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             clientId = clientID;
+            var client = _unitofWork.Client.Get(c => c.Id == clientId);
+            var clientResponses = _unitofWork.ClientResponse.Get(c => c.Client.Id == clientId);
 
-            if(String.IsNullOrEmpty(clientId))
+            if (String.IsNullOrEmpty(clientId))
             {
                 return NotFound();
             }
@@ -47,20 +49,34 @@ namespace JohariWindow.Pages.ClientPage
                 listOfSelectedAdjectives = new SelectedAdjectiveList()
                 {
                     PositiveAdjectives = new string[12],
-                    NegativeAdjectives = new string[5]
-                }
+                    NegativeAdjectives = new string[7]
+                },
+                hasSubmited = false               
             };
+
+            if (clientResponses != null) //checks to see if the client has submitted responses previously by retrieving data from the Db. 
+            {
+                ClientObject.hasSubmited = true;
+            }
             return Page();
         }
 
         public IActionResult OnPost()
         {
+            var clientUser = _unitofWork.Client.Get(c => c.Id == ClientObject.ClientId);
+            var clientChoices = _unitofWork.ClientResponse.List(c=>c.Client.Id == clientUser.Id);
+
+            if(clientChoices != null)
+            {
+                _unitofWork.ClientResponse.Delete(clientChoices);
+            }
+
             if(!ModelState.IsValid)
             {
                 return Page();
             }
 
-            var clientUser = _unitofWork.Client.Get(c => c.Id == ClientObject.ClientId);
+            
 
             foreach (string id in Adjectives)
             {

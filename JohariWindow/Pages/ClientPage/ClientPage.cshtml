@@ -1,15 +1,27 @@
-﻿
-@page
+﻿@page
 @model JohariWindow.Pages.ClientPage.AdjectiveModel
+@using Microsoft.AspNetCore.Identity
+@using ApplicationCore.Models
+@using ApplicationCore.Interfaces
+
+@inject SignInManager<Client> SignInManager
+@inject UserManager<Client> UserManager
+@inject IUnitOfWork UnitOfWork
 @{
 
 }
 
-
 <div>
+    @*@if (SignInManager.IsSignedIn(User))
+        {
+            string clientId = UserManager.GetUserId(User);
+            var client = UnitOfWork.Client.Get(c => c.Id == clientId);
+            var clientResponses = UnitOfWork.ClientResponse.Get(c => c.Client.Id == clientId);
+
+        }*@
     <h1>Welcome to the Client Page!</h1>
-    <h4>Select 12 positive adjectives and 5 negative adjectives about yourself!</h4>
-    <form method="post">
+    <h4>Select 12 positive adjectives and 7 negative adjectives about yourself!</h4>
+    <form id="adjectiveForm" method="post" onload="startOver()">
         <div class="text-left">
             <br />
             <br />
@@ -46,8 +58,9 @@
             </div>
         </div>
         <input type="text" name="ClientObject.ClientId" value="@Model.ClientObject.ClientId" hidden />
+        <input type="text" name="ClientObject.hasSubmitted" value="@Model.ClientObject.hasSubmited" hidden />
         <div class="form-group mt-2">
-            <input type="submit" value="Submit" class="btn btn-primary" onclick="return validateCheckboxes()" />
+            <input type="button" id="confirmButton" value="Submit" class="btn btn-primary" />
         </div>
     </form>
     <br />
@@ -55,12 +68,10 @@
 
 </div>
 @section Scripts{
-    <script>
-
-
-        function validateCheckboxes() {
+    <script type="text/javascript">
+        $("#confirmButton").on("click", function (e) {
+            e.preventDefault();
             var inputElems = document.getElementsByTagName("input"), posCount = 0, negCount = 0;
-
             for (var i = 0; i < inputElems.length; i++) {
                 if (inputElems[i].type == "checkbox" && inputElems[i].id == "positiveCB" && inputElems[i].checked == true) {
                     posCount++;
@@ -92,10 +103,10 @@
                 return false;
             }
 
-            if (negCount > 5) {
+            if (negCount > 7) {
                 swal({
                     title: "Warning: Too Many Negative Adjectives Selected",
-                    text: "More than 5 Negative adjectives selected. Please select only 5.",
+                    text: "More than 7 Negative adjectives selected. Please select only 7.",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true
@@ -103,22 +114,31 @@
                 return false;
             }
 
-            if (negCount < 5) {
+            if (negCount < 7) {
                 swal({
                     title: "Warning: Not Enough Negative Adjectives Selected",
-                    text: "Less than 5 Negative adjectives selected. Please select at least 5.",
+                    text: "Less than 7 Negative adjectives selected. Please select at least 7.",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true
                 })
                 return false;
             }
-
-            if (posCount == 12 && negCount == 5) {
-                return true;
-            }
-        }
-
-    </script>
+            swal({
+                title: "Are you sure?",
+                text: "Submitting will overwrite any previously selected choices.",
+                type: "warning",
+                buttons: ["Cancel", true]
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+                    document.getElementById("adjectiveForm").submit();
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            });
+        });
+ </script>
 }
 
