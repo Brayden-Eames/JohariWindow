@@ -5,6 +5,21 @@
 
 <div>
     <h1>Admin Page</h1>
+    <br />
+    <p>Select a client name to generate their Johari window:</p>
+    <div>
+        <select id="searchClient" type="select-one" style="width: 200px; height: 30px; text-align: center">
+            <option selected="selected">--SELECT--</option>
+            @{ 
+                foreach(var client in @Model.AdminPageObject.ClientListData)
+                {
+                    <option asp-route-clientId="@Model.AdminPageObject.selectedClientId" value="@client.ClientId">@client.ClientFullName</option>
+                }
+            }
+        </select>
+    </div>
+    <br />
+    <br />
     <div class="container" style="height:  28rem;">
         <div class="row">
             <div class="col-6">
