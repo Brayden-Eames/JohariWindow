@@ -24,57 +24,148 @@
     <div class="container" style="height:  28rem;">
         <div class="row">
             <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
+                <div class="card col-12">
+                    <p style="text-align: center">OPEN SELF</p>
+                    <div class="row ">
                         @{
                             if (Model.AdminPageObject.OpenSelfSlot == null)
                             {
-                                <p>OPEN ADJECTIVES</p>
                             }
                             else
                             {
                                 @foreach (var choice in Model.AdminPageObject.OpenSelfSlot)
                                 {
-
                                     @if (choice.chosenCount == 1)
                                     {
-                                        <p>@choice.Adjective</p>
+                                        <div class="card col-3">
+                                            <p>@choice.Adjective</p>
+                                        </div>
                                     }
                                     @if (choice.chosenCount == 2)
                                     {
-                                        <p class="font-weight-bold">@choice.Adjective</p>
+                                        <div class="card col-3">
+                                            <p class="font-weight-bold">@choice.Adjective</p>
+                                        </div>
                                     }
                                     @if (choice.chosenCount >= 3)
                                     {
-                                        <p class="font-weight-bold"><u>@choice.Adjective</u></p>
+                                        <div class="card col-3">
+                                            <p class="font-weight-bold"><u>@choice.Adjective</u></p>
+                                        </div>
                                     }
                                 }
                             }
                         }
-
                     </div>
                 </div>
             </div>
             <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        BLIND ADJECTIVE MATCHES GO HERE
+                <div class="card col-12">
+                    <p style="text-align: center">BLIND SELF</p>
+                    <div class="row ">
+                        @{
+                            if (Model.AdminPageObject.BlindSelfSlot == null)
+                            {
+                            }
+                            else
+                            {
+                                @foreach (var choice in Model.AdminPageObject.BlindSelfSlot)
+                                {
+                                    @if (choice.chosenCount == 1)
+                                    {
+                                        <div class="card col-3">
+                                            <p>@choice.Adjective</p>
+                                        </div>
+                                    }
+                                    @if (choice.chosenCount == 2)
+                                    {
+                                        <div class="card col-3">
+                                            <p class="font-weight-bold">@choice.Adjective</p>
+                                        </div>
+                                    }
+                                    @if (choice.chosenCount >= 3)
+                                    {
+                                        <div class="card col-3">
+                                            <p class="font-weight-bold"><u>@choice.Adjective</u></p>
+                                        </div>
+                                    }
+                                }
+                            }
+                        }
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        HIDDEN ADJECTIVE MATCHES GO HERE.
+                <div class="card col-12">
+                    <p style="text-align: center">HIDDEN SELF</p>
+                    <div class="row ">
+                        @{
+                            if (Model.AdminPageObject.HiddenSelfSlot == null)
+                            {
+                            }
+                            else
+                            {
+                                @foreach (var choice in Model.AdminPageObject.HiddenSelfSlot)
+                                {
+                                    @if (choice.chosenCount == 1)
+                                    {
+                                        <div class="card col-3">
+                                            <p>@choice.Adjective</p>
+                                        </div>
+                                    }
+                                    @if (choice.chosenCount == 2)
+                                    {
+                                        <div class="card col-3">
+                                            <p class="font-weight-bold">@choice.Adjective</p>
+                                        </div>
+                                    }
+                                    @if (choice.chosenCount >= 3)
+                                    {
+                                        <div class="card col-3">
+                                            <p class="font-weight-bold"><u>@choice.Adjective</u></p>
+                                        </div>
+                                    }
+                                }
+                            }
+                        }
                     </div>
                 </div>
             </div>
             <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        UNKNOWN ADJECTIVES GO HERE
+                <div class="card col-12">
+                    <p style="text-align: center">UNKNOWN SELF</p>
+                    <div class="row ">
+                        @{
+                            if (Model.AdminPageObject.UnknownSelfSlot == null)
+                            {
+                            }
+                            else
+                            {
+                                @foreach (var choice in Model.AdminPageObject.UnknownSelfSlot)
+                                {
+                                    @if (choice.chosenCount == 1)
+                                    {
+                                        <div class="card col-3">
+                                            <p>@choice.Adjective</p>
+                                        </div>
+                                    }
+                                    @if (choice.chosenCount == 2)
+                                    {
+                                        <div class="card col-3">
+                                            <p class="font-weight-bold">@choice.Adjective</p>
+                                        </div>
+                                    }
+                                    @if (choice.chosenCount >= 3)
+                                    {
+                                        <div class="card col-3">
+                                            <p class="font-weight-bold"><u>@choice.Adjective</u></p>
+                                        </div>
+                                    }
+                                }
+                            }
+                        }
                     </div>
                 </div>
             </div>
@@ -100,12 +191,6 @@
                     });
                 }
             });
-
-            //$('[data-toggle="popover"]').popover();
-
-            //$('.popover-dismiss').popover({
-            //    trigger: 'focus'
-            //});
         });
     </script>
 
