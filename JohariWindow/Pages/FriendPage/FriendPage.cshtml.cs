@@ -36,7 +36,7 @@ namespace JohariWindow.Pages.FriendPage
                 listOfSelectedAdjectives = new SelectedAdjectiveList()
                 {
                     PositiveAdjectives = new string[12],
-                    NegativeAdjectives = new string[5]
+                    NegativeAdjectives = new string[7]
                 }
             };
             return Page();

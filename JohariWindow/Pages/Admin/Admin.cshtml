@@ -2,22 +2,23 @@
 @model JohariWindow.Pages.Admin.AdminModel
 @{
 }
-
+<link rel="stylesheet" type="text/css" href="~/css/selectize.bootstrap4.css" />
 <div>
     <h1>Admin Page</h1>
     <br />
     <p>Select a client name to generate their Johari window:</p>
-    <div>
+    <form method="post">
         <select id="searchClient" type="select-one" style="width: 200px; height: 30px; text-align: center">
-            <option selected="selected">--SELECT--</option>
-            @{ 
-                foreach(var client in @Model.AdminPageObject.ClientListData)
+            <option selected="selected"></option>
+            @{
+                foreach (var client in @Model.AdminPageObject.ClientListData)
                 {
-                    <option asp-route-clientId="@Model.AdminPageObject.selectedClientId" value="@client.ClientId">@client.ClientFullName</option>
+                    <option value="@client.ClientId">@client.ClientFullName</option>
                 }
             }
         </select>
-    </div>
+        <button asp-page-handler="BuildJohari" type="submit" id="btnRetrieveClient">Submit</button>
+    </form>
     <br />
     <br />
     <div class="container" style="height:  28rem;">
@@ -25,7 +26,32 @@
             <div class="col-6">
                 <div class="card">
                     <div class="card-body">
-                        OPEN ADJECTIVE MATCHES GO HERE
+                        @{
+                            if (Model.AdminPageObject.OpenSelfSlot == null)
+                            {
+                                <p>OPEN ADJECTIVES</p>
+                            }
+                            else
+                            {
+                                @foreach (var choice in Model.AdminPageObject.OpenSelfSlot)
+                                {
+
+                                    @if (choice.chosenCount == 1)
+                                    {
+                                        <p>@choice.Adjective</p>
+                                    }
+                                    @if (choice.chosenCount == 2)
+                                    {
+                                        <p class="font-weight-bold">@choice.Adjective</p>
+                                    }
+                                    @if (choice.chosenCount >= 3)
+                                    {
+                                        <p class="font-weight-bold"><u>@choice.Adjective</u></p>
+                                    }
+                                }
+                            }
+                        }
+
                     </div>
                 </div>
             </div>
@@ -55,3 +81,32 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/selectize.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#searchClient').selectize({
+                create: false,
+                sortField: "text",
+                searchField: ["text"],
+                maxOptions: 5,
+                maxItems: 1,
+                closeAfterSelect: true,
+                placeholder: "Type to search for client...",
+                onChange: function (value) {
+                    $('#btnRetrieveClient').attr("formaction", function () {
+                        return $(this).attr("formaction") + "&clientId=" + value;
+                    });
+                }
+            });
+
+            //$('[data-toggle="popover"]').popover();
+
+            //$('.popover-dismiss').popover({
+            //    trigger: 'focus'
+            //});
+        });
+    </script>
+
+}
