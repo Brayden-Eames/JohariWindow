@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using ApplicationCore.Interfaces;
 using ApplicationCore.Models;
+using Infrastructure.Data;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -26,6 +28,7 @@ namespace JohariWindow.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IUnitOfWork _unitofWork;
 
 
         public RegisterModel(
@@ -33,13 +36,15 @@ namespace JohariWindow.Areas.Identity.Pages.Account
             SignInManager<Client> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IUnitOfWork unitofWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
+            _unitofWork = unitofWork;
         }
 
         [BindProperty]
@@ -110,20 +115,20 @@ namespace JohariWindow.Areas.Identity.Pages.Account
                 if (!await _roleManager.RoleExistsAsync(SD.AdminRole))
                 {
                     _roleManager.CreateAsync(new IdentityRole(SD.AdminRole)).GetAwaiter().GetResult();
-                    //_roleManager.CreateAsync(new IdentityRole(SD.ClientRole)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new IdentityRole(SD.ClientRole)).GetAwaiter().GetResult();
                 }
                 if (result.Succeeded)
                 //assign role to the user (from the form radio options available after the first manager is created)
                 {
-                    if (role == SD.ClientRole)
-                    {
-                        await _userManager.AddToRoleAsync(user, SD.ClientRole);
-                    }
-                    else
+                    List<Client> userList = _unitofWork.Client.List().ToList();
+                    if(userList.Count == 1)
                     {
                         await _userManager.AddToRoleAsync(user, SD.AdminRole);
                     }
-                   
+                    if (role == SD.ClientRole)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.ClientRole);
+                    }                   
                     _logger.LogInformation("User created a new account with password.");
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
