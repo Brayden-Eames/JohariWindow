@@ -73,6 +73,10 @@ namespace JohariWindow.Areas.Identity.Pages.Account
             public string LastName { get; set; }
             [Required]
             public string PhoneNumber { get; set; }
+            [Required]
+            public DateTime DOB { get; set; }
+            [Required]
+            public string Gender { get; set; }
 
         }
 
@@ -86,7 +90,7 @@ namespace JohariWindow.Areas.Identity.Pages.Account
         {
             //retrieve the role from the form
             string role = Request.Form["rdUserRole"].ToString();
-            if (role == "") { role = SD.AdminRole; } //make the first login an admin)
+            if (role == "") { role = SD.ClientRole; } //make the first login an admin)
             returnUrl ??= Url.Content("~/"); //null-coalescing assignment operator ??= assigns the value of right-hand operand to its left-hand operand only if the left-hand is nulll
             if (ModelState.IsValid)
             {
@@ -97,25 +101,27 @@ namespace JohariWindow.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    PhoneNumber = Input.PhoneNumber
+                    PhoneNumber = Input.PhoneNumber,
+                    dateOfBirth = Input.DOB,
+                    gender = Input.Gender
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 //add the roles to the ASPNET Roles table if they do not exist yet
                 if (!await _roleManager.RoleExistsAsync(SD.AdminRole))
                 {
                     _roleManager.CreateAsync(new IdentityRole(SD.AdminRole)).GetAwaiter().GetResult();
-                    _roleManager.CreateAsync(new IdentityRole(SD.ClientRole)).GetAwaiter().GetResult();
+                    //_roleManager.CreateAsync(new IdentityRole(SD.ClientRole)).GetAwaiter().GetResult();
                 }
                 if (result.Succeeded)
                 //assign role to the user (from the form radio options available after the first manager is created)
                 {
-                    if (role == SD.AdminRole)
+                    if (role == SD.ClientRole)
                     {
-                        await _userManager.AddToRoleAsync(user, SD.AdminRole);
+                        await _userManager.AddToRoleAsync(user, SD.ClientRole);
                     }
                     else
                     {
-                        await _userManager.AddToRoleAsync(user, SD.ClientRole);
+                        await _userManager.AddToRoleAsync(user, SD.AdminRole);
                     }
                    
                     _logger.LogInformation("User created a new account with password.");

@@ -8,17 +8,9 @@
 @inject UserManager<Client> UserManager
 @inject IUnitOfWork UnitOfWork
 @{
-
 }
 
 <div>
-    @*@if (SignInManager.IsSignedIn(User))
-        {
-            string clientId = UserManager.GetUserId(User);
-            var client = UnitOfWork.Client.Get(c => c.Id == clientId);
-            var clientResponses = UnitOfWork.ClientResponse.Get(c => c.Client.Id == clientId);
-
-        }*@
     <h1>Welcome to the Client Page!</h1>
     <h4>Select 12 positive adjectives and 7 negative adjectives about yourself!</h4>
     <form id="adjectiveForm" method="post" onload="startOver()">
@@ -36,9 +28,7 @@
                                 <input type="checkbox" name="Adjectives" value="@adjective.AdjectiveId" id="positiveCB" /> @adjective.AdjName
                                 <br />
                             }
-
                         }
-
                     </div>
                     <div class="col-6">
                         <p>Negative Adjectives</p>
@@ -50,9 +40,7 @@
 
                                 <br />
                             }
-
                         }
-
                     </div>
                 </div>
             </div>

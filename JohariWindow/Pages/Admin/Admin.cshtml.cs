@@ -40,6 +40,7 @@ namespace JohariWindow.Pages.Admin
         }
         public IActionResult OnPostBuildJohari(string clientId)
         {
+            
             IEnumerable<ApplicationCore.Models.Client> clients = _unitofWork.Client.List();
 
             AdminPageObject = new AdminPageVM()
@@ -51,7 +52,7 @@ namespace JohariWindow.Pages.Admin
                 BlindSelfSlot = new List<AdjectiveDataStruct>(),
                 UnknownSelfSlot = new List<AdjectiveDataStruct>(),
             };
-
+            
             foreach (ApplicationCore.Models.Client client in clients)
             {
                 AdminPageObject.ClientListData.Add(new ClientsListData()
@@ -60,7 +61,10 @@ namespace JohariWindow.Pages.Admin
                     ClientId = client.Id,
                 });
             }
-
+            if (clientId == null)
+            {
+                return Page();
+            }
             List<ClientResponse> clientResponses = (_unitofWork.ClientResponse.List(cr => cr.Client.Id == AdminPageObject.Client.Id)).ToList();
             List<FriendResponse> friendResponses = (_unitofWork.FriendResponse.List(fr => fr.Client.Id == AdminPageObject.Client.Id)).ToList();
             List<Adjective> adjectives = (_unitofWork.Adjective.List()).ToList();

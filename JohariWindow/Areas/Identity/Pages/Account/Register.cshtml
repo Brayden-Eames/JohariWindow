@@ -1,6 +1,7 @@
 @page
 @model RegisterModel
 @using Infrastructure.Services
+@using Microsoft.Extensions.Options
 
 @{ ViewData["Title"] = "Register"; }
 <div class="py-4 my-4">
@@ -13,10 +14,10 @@
                         <h3 class="col-12 text-success text-center py-4">
                             @if (User.IsInRole(SD.AdminRole))
                             {
-                <strong>Register an Employee</strong> }
-                            else
-                            {
-                <strong>Sign Up</strong>}
+                    <strong>Register an Employee</strong> }
+                else
+                {
+                    <strong>Sign Up</strong>}
                         </h3>
                         <hr />
                         <div class="form-row py-2">
@@ -42,7 +43,15 @@
                             <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                         </div>
                         <div class="py-2">
-                            <input type="password" asp-for="Input.Password" autocomplete="off" placeholder="Password" class="form-control" />
+                            <input type="text" asp-for="Input.DOB" id="datepicker" autocomplete="off" placeholder="DateofBirth" class="form-control" />
+                            <span asp-validation-for="Input.DOB" class="text-danger"></span>
+                        </div>
+                        <div class="py-2">
+                            <input type="text" asp-for="Input.Gender" autocomplete="off" placeholder="Gender" class="form-control" />
+                            <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                        </div>
+                        <div class="py-2">
+                            <input type="password" asp-for="Input.Password" autocomplete="off" placeholder="Password" class="form-control" data- />
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
                         <div class="py-2">
@@ -51,10 +60,10 @@
                         </div>
                         @if (User.IsInRole(SD.AdminRole))
                         {
-            <div class="py-2">
-                <input type="radio" name="rdUserRole" value="@SD.ClientRole" /> @SD.ClientRole
-                <input type="radio" name="rdUserRole" value="@SD.AdminRole" /> @SD.AdminRole
-            </div>}
+                    <div class="py-2">
+                        <input type="radio" name="rdUserRole" value="@SD.ClientRole" /> @SD.ClientRole
+                        <input type="radio" name="rdUserRole" value="@SD.AdminRole" /> @SD.AdminRole
+                    </div>}
                         <div class="py-2">
                             <button type="submit" class="btn btn-success form-control">Register</button>
                         </div>
@@ -66,4 +75,13 @@
 </div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                yearRange: '1900: ' + new Date().getFullYear(),
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
 }

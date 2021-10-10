@@ -8,7 +8,7 @@
     <br />
     <p>Select a client name to generate their Johari window:</p>
     <form method="post">
-        <select id="searchClient" type="select-one" style="width: 200px; height: 30px; text-align: center">
+        <select id="searchClient" type="select-one" style="width: 225px; height: 30px; text-align: center">
             <option selected="selected"></option>
             @{
                 foreach (var client in @Model.AdminPageObject.ClientListData)
@@ -17,15 +17,14 @@
                 }
             }
         </select>
-        <button asp-page-handler="BuildJohari" type="submit" id="btnRetrieveClient">Submit</button>
+        <button asp-page-handler="BuildJohari" type="submit" id="btnRetrieveClient" class="btn btn-primary">Submit</button>
     </form>
     <br />
-    <br />
-    <div class="container" style="height:  28rem;">
+    <div class="container" style="height:  30rem;">
         <div class="row">
-            <div class="col-6">
-                <div class="card col-12">
-                    <p style="text-align: center">OPEN SELF</p>
+            <div class="col-6" style="height: 15rem; overflow-y: scroll">
+                <div class="card col-12 text-center justify-content-center">
+                    <b>OPEN SELF</b>
                     <div class="row ">
                         @{
                             if (Model.AdminPageObject.OpenSelfSlot == null)
@@ -37,20 +36,20 @@
                                 {
                                     @if (choice.chosenCount == 1)
                                     {
-                                        <div class="card col-3">
-                                            <p>@choice.Adjective</p>
+                                        <div class="card d-flex col-4 text-center align-content-center justify-content-center" style="height: 35px">
+                                            @choice.Adjective
                                         </div>
                                     }
                                     @if (choice.chosenCount == 2)
                                     {
-                                        <div class="card col-3">
-                                            <p class="font-weight-bold">@choice.Adjective</p>
+                                        <div class="card d-flex col-4 text-center align-content-center justify-content-center font-weight-bold" style="height: 35px">
+                                            @choice.Adjective
                                         </div>
                                     }
                                     @if (choice.chosenCount >= 3)
                                     {
-                                        <div class="card col-3">
-                                            <p class="font-weight-bold"><u>@choice.Adjective</u></p>
+                                        <div class="card d-flex col-4 text-center align-content-center justify-content-center font-weight-bold" style="height: 35px">
+                                            <u>@choice.Adjective</u>
                                         </div>
                                     }
                                 }
@@ -59,9 +58,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="card col-12">
-                    <p style="text-align: center">BLIND SELF</p>
+            <div class="col-6" style="height: 15rem; overflow-y: scroll">
+                <div class="card col-12 text-center justify-content-center">
+                    <b>BIND SELF</b>
                     <div class="row ">
                         @{
                             if (Model.AdminPageObject.BlindSelfSlot == null)
@@ -73,20 +72,20 @@
                                 {
                                     @if (choice.chosenCount == 1)
                                     {
-                                        <div class="card col-3">
-                                            <p>@choice.Adjective</p>
+                                        <div class="card d-flex col-4 text-center align-content-center justify-content-center" style="height: 35px">
+                                            @choice.Adjective
                                         </div>
                                     }
                                     @if (choice.chosenCount == 2)
                                     {
-                                        <div class="card col-3">
-                                            <p class="font-weight-bold">@choice.Adjective</p>
+                                        <div class="card d-flex col-4 text-center align-content-center justify-content-center font-weight-bold" style="height: 35px">
+                                            @choice.Adjective
                                         </div>
                                     }
                                     @if (choice.chosenCount >= 3)
                                     {
-                                        <div class="card col-3">
-                                            <p class="font-weight-bold"><u>@choice.Adjective</u></p>
+                                        <div class="card d-flex col-4 text-center align-content-center justify-content-center font-weight-bold" style="height: 35px">
+                                            <u>@choice.Adjective</u>
                                         </div>
                                     }
                                 }
@@ -96,10 +95,11 @@
                 </div>
             </div>
         </div>
+        <br />
         <div class="row">
-            <div class="col-6">
-                <div class="card col-12">
-                    <p style="text-align: center">HIDDEN SELF</p>
+            <div class="col-6" style="height: 15rem; overflow-y: scroll">
+                <div class="card col-12 text-center justify-content-center ">
+                    <b>HIDDEN SELF</b>
                     <div class="row ">
                         @{
                             if (Model.AdminPageObject.HiddenSelfSlot == null)
@@ -109,22 +109,22 @@
                             {
                                 @foreach (var choice in Model.AdminPageObject.HiddenSelfSlot)
                                 {
-                                    @if (choice.chosenCount == 1)
+                                    @if (choice.chosenCount == 1 || choice.chosenCount == 0)
                                     {
-                                        <div class="card col-3">
-                                            <p>@choice.Adjective</p>
+                                        <div class="card d-flex col-4 text-center align-content-center justify-content-center" style="height: 35px">
+                                            @choice.Adjective
                                         </div>
                                     }
                                     @if (choice.chosenCount == 2)
                                     {
-                                        <div class="card col-3">
-                                            <p class="font-weight-bold">@choice.Adjective</p>
+                                        <div class="card d-flex col-4 text-center align-content-center justify-content-center font-weight-bold" style="height: 35px">
+                                            @choice.Adjective
                                         </div>
                                     }
                                     @if (choice.chosenCount >= 3)
                                     {
-                                        <div class="card col-3">
-                                            <p class="font-weight-bold"><u>@choice.Adjective</u></p>
+                                        <div class="card d-flex col-4 text-center align-content-center justify-content-center font-weight-bold" style="height: 35px">
+                                            <u>@choice.Adjective</u>
                                         </div>
                                     }
                                 }
@@ -133,9 +133,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="card col-12">
-                    <p style="text-align: center">UNKNOWN SELF</p>
+            <div class="col-6" style="height: 15rem; overflow-y: scroll">
+                <div class="card col-12 text-center justify-content-center">
+                    <b>UNKNOWN SELF</b>
                     <div class="row ">
                         @{
                             if (Model.AdminPageObject.UnknownSelfSlot == null)
@@ -145,22 +145,22 @@
                             {
                                 @foreach (var choice in Model.AdminPageObject.UnknownSelfSlot)
                                 {
-                                    @if (choice.chosenCount == 1)
+                                    @if (choice.chosenCount == 1 || choice.chosenCount == 0)
                                     {
-                                        <div class="card col-3">
-                                            <p>@choice.Adjective</p>
+                                        <div class="card d-flex col-4 text-center align-content-center justify-content-center" style="height: 35px">
+                                            @choice.Adjective
                                         </div>
                                     }
                                     @if (choice.chosenCount == 2)
                                     {
-                                        <div class="card col-3">
-                                            <p class="font-weight-bold">@choice.Adjective</p>
+                                        <div class="card d-flex col-4 text-center align-content-center justify-content-center font-weight-bold" style="height: 35px">
+                                            @choice.Adjective
                                         </div>
                                     }
                                     @if (choice.chosenCount >= 3)
                                     {
-                                        <div class="card col-3">
-                                            <p class="font-weight-bold"><u>@choice.Adjective</u></p>
+                                        <div class="card d-flex col-4 text-center align-content-center justify-content-center font-weight-bold" style="height: 35px">
+                                            <u>@choice.Adjective</u>
                                         </div>
                                     }
                                 }
@@ -172,6 +172,9 @@
         </div>
     </div>
 </div>
+<br />
+<br />
+<br />
 
 @section Scripts{
     <script type="text/javascript" src="~/js/selectize.js"></script>

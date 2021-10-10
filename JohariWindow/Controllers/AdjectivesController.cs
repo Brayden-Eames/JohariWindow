@@ -25,8 +25,6 @@ namespace JohariWindow.Controllers
             }
             catch (Exception)
             {
-
-                //return Page();
                 throw;
             }
         }
